@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+.verticalCss h1 {
+    /*it convert the text into vertical mode */
+    writing-mode: vertical-lr;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* flip image  */
+.flip-imgage img {
+    height: 60vh;
+    width: auto;
+    /* for getting us licence in web  */
+    transform: scaleX(-1);
+    /* transform: scaleY(-1); */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/* smooth scrolling  */
+html {
+    scroll-behavior: smooth;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.scroll-1 {
+    height: 100vh;
+    width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.scroll-2 {
+    height: 100vh;
+    width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.snap-scroll-parent {
+    width: 30%;
+    height: 500px;
+    overflow-x: auto;
+    display: flex;
+    scroll-snap-type: x mandatory;
+    /* we can resize the every element by doing this  */
+    resize: both;
+}
+
+.snap-child {
+    width: 100%;
+    height: 500px;
 }
