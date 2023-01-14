@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .verticalCss h1 {
     /*it convert the text into vertical mode */
     writing-mode: vertical-lr;
@@ -28,7 +32,7 @@ html {
     width: 100%;
 }
 
-
+/* this is scroll behavior */
 .snap-scroll-parent {
     width: 30%;
     height: 500px;
@@ -36,10 +40,67 @@ html {
     display: flex;
     scroll-snap-type: x mandatory;
     /* we can resize the every element by doing this  */
-    resize: both;
+    /* resize: both; */
+    /* resize: horizontal; */
+    /* resize:vertical; */
 }
 
+/* snap horizontali scroll  */
 .snap-child {
     width: 100%;
     height: 500px;
 }
+
+/* for text truncate  */
+.truncate-class p {
+    max-width: 20rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* for making a text gradient  */
+
+.before-gradient {
+    background: linear-gradient(#536976, #292E49);
+}
+
+.after-gradient {
+    background: linear-gradient(#334d50, #cbcaa5);
+    -webkit-background-clip: text;
+    /* -webkit-text-fill-color:blue; */
+    -webkit-text-fill-color: transparent;
+
+}
+
+.objectFitclass {
+    height: auto;
+    background-color: black;
+}
+
+.objectFitclass img {
+    height: auto;
+    object-fit: contain;
+}
+
+.pointer_event {
+    /* it does not select the text when we want to select it with cursour*/
+    /* pointer-events: none; */
+    opacity: 1;
+    animation: fade 2s infinite ease-in 1s;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
