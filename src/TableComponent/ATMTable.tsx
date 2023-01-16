@@ -1,66 +1,57 @@
 import React from 'react'
-import { ATMTablePropsType } from './ATMTablePropType';
+import "./Table.css";
+import { ATMTablePropTypes } from './ATMTablePropType';
+import Checkbox from '@mui/material/Checkbox';
 
-function getFlex(number: number) {
-    return `flex-[${number}_${number}_0%]`
-}
+function ATMTable({ headingRow, cellRows, isCheckbox }: ATMTablePropTypes) {
 
-console.log(getFlex(3))
-
-function ATMTable({ rows, headers }: ATMTablePropsType) {
+    const checkCss = {
+        color: '#EE5924',
+        '&.Mui-checked': {
+            color: '#EE5924',
+        },
+    }
 
     return (
-        <div className='h-96 my-40 justify-center grid grid-cols-12'>
+        <div className='container mt-5 '>
 
-            <div className='col-span-2'></div>  {/* delete it */}
-
-            <div className='table-parent bg-white col-span-8 p-6'>
-
-                <div className='table-head'>
-
-                    {/* table heading  */}
-                    <div className='table-head-row flex bg-cb-table-heading py-3 px-4 rounded-lg'>
-                        {headers.map((ele, ind) => {
-
-                            // let flex = getFlex(ele.flex || 1)
-
-                            return (
-                                <div key={ele.headerName}
-                                    className={`text-orange font-bold capitalize ${ele.flex}`}
-                                >
-                                    {ele.headerName}
-                                </div>
-                            )
-                        })}
-                    </div>
-
-                    {/* table body  */}
-                    <div className='bg-cb-gray-list'>
-                        {/* table row  */}
-                        {
-                            rows.map((row) => {
-
-                                return (
-                                    <div className='table-data-row flex px-4 my-3 border-b border-slate-500'>
-                                        {
-                                            headers.map((header) => {
-                                                // let flex = getFlex(header.flex || 1)
-                                                return (
-                                                    <div className={`${header.flex}`}>
-                                                        {header.renderCell ? header.renderCell(row) : row[header.field]}
-                                                    </div>
-                                                )
-                                            })
-                                        }
-
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                </div>
+            <div className='table-header flex items-center p-3 rounded'>
+                {isCheckbox ? <Checkbox sx={checkCss} /> : null}
+                {
+                    headingRow.map((ele, ind) => {
+                        return (
+                            <div id='cell' key={ind} className={`${ele.flex}`}>
+                                {ele.headingData}
+                            </div>
+                        )
+                    })
+                }
             </div>
-            <div className='col-span-2'></div>  {/* delete it */}
+
+            {/* table body  */}
+            {
+                cellRows.map((ele, ind) => {
+                    return (
+                        <div key={ind}
+                            className='table-body flex items-center p-3 rounded border-1 border-b'>
+                            {isCheckbox ? <Checkbox sx={checkCss} /> : null}
+
+                            {
+                                headingRow.map((heading, ind) => {
+                                    return (
+                                        <div key={ind}
+                                            className={`${heading.flex}`}>
+                                            {heading.renderCell ? heading.renderCell(ele) : ele[heading.field]}
+                                            {/* {ele[heading.field]} */}
+                                        </div>
+                                    )
+                                })
+                            }
+
+                        </div>
+                    )
+                })
+            }
         </div>
     )
 }
