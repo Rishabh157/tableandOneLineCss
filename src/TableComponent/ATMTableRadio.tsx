@@ -2,7 +2,7 @@ import React from "react";
 import ATMTable from "./ATMTable";
 import Radio from '@mui/material/Radio';
 
-
+// dummy data for table heading
 // const headings = [
 //   {
 //     headingData : "primary",
@@ -39,22 +39,15 @@ import Radio from '@mui/material/Radio';
 
 // ]
 
-const rows = [
-    { id: 0, firstname: "Steve", lastName: "Roger", age: 107, power: "Super Human Serum" },
-    { id: 1, firstname: "Tony", lastName: "Stark", age: 35, power: "Iron Man Suit" },
-    { id: 2, firstname: "Thor", lastName: "Odin", age: 1700, power: "God Of Thunder" },
-    { id: 3, firstname: "Client", lastName: "Bartin", age: 32, power: "Master in Archry" },
-    { id: 4, firstname: "Bruce", lastName: "Banner", age: 45, power: "Gama Rays" },
-    { id: 5, firstname: "Natasha", lastName: "Romenoff", age: 26, power: "Fighter" },
-]
+const TableIndex = () => {
 
-const Index = () => {
-    
-    const [selectedRows, setSelectedRows] = React.useState<any[]>([])
-    const [radioSelect, setradioSelect] = React.useState<any>({})
-    console.log("from selectedRows", radioSelect)
+    const [selectedRows, setSelectedRows] = React.useState<any[]>([])    // this state for CheckBox Data
+    const [radioSelectRow, setradioSelectRow] = React.useState<any>({})  // this state for RadioButton Data
 
-    const checkCss = {
+    // console.log("from CheckBoxSelectedRows", selectedRows)               // watch the checkbox data
+    // console.log("from CheckBoxSelectedRows", radioSelectRow)             // watch the radiobutton data
+
+    const checkCss = {                                                   // style for RadioButton CBO UI 
         color: '#EE5924',
         '&.Mui-checked': {
             color: '#EE5924',
@@ -62,39 +55,49 @@ const Index = () => {
     }
 
     const headings = [
+        // if we want to send the radio button we have to define it in the heading 
         {
-            headingData: "primary",
+            heading: "primary",
             field: "primary",
             flex: "flex-[1_1_0%]",
-            renderCell: (row: any) => <Radio name='rowRadioButton' sx={checkCss} onChange={() => setradioSelect(row)} checked={radioSelect.id === row.id} />
+            renderCell: (row: any) => <Radio name='rowRadioButton' sx={checkCss} onChange={() => setradioSelectRow(row)} checked={radioSelectRow.id === row.id} />
         },
         {
-            headingData: "sNo",
+            heading: "sNo",
             field: "id",
-            flex: 'flex-[2_2_0%]',
+            flex: 'flex-[1_1_0%]',
         },
         {
-            headingData: "firstname",
+            heading: "firstname",
             field: "firstname",
             flex: 'flex-[2_2_0%]',
         },
         {
-            headingData: "lastname",
+            heading: "lastname",
             field: "lastName",
             flex: 'flex-[2_2_0%]',
         },
         {
-            headingData: "age",
+            heading: "age",
             field: "age",
             flex: 'flex-[2_2_0%]',
         },
         {
-            headingData: "powers",
+            heading: "powers",
             field: "power",
             flex: 'flex-[3_3_0%]',
-            // renderCell: (row: any) => <div className="bg-slate-500 hover:cursor-pointer">{row.power}</div>
+            // renderCell: (row: any) => <div className="bg-slate-500 hover:cursor-pointer">{row.power}</div> // if we want to add a additional perform in the rows
         },
 
+    ]
+
+    const rows = [
+        { id: 0, firstname: "Steve", lastName: "Roger", age: 107, power: "Super Human Serum" },
+        { id: 1, firstname: "Tony", lastName: "Stark", age: 35, power: "Iron Man Suit" },
+        { id: 2, firstname: "Thor", lastName: "Odin", age: 1700, power: "God Of Thunder" },
+        { id: 3, firstname: "Client", lastName: "Bartin", age: 32, power: "Master in Archry" },
+        { id: 4, firstname: "Bruce", lastName: "Banner", age: 45, power: "Gama Rays" },
+        { id: 5, firstname: "Natasha", lastName: "Romenoff", age: 26, power: "Fighter" },
     ]
 
     return (
@@ -102,14 +105,15 @@ const Index = () => {
             <ATMTable
                 heading={headings}
                 rows={rows}
-                isCheckbox={true}
+                isCheckbox={false}
                 isAllSelected={rows.length === selectedRows.length}
 
-
                 onRowSelect={(row) => {
+                    // for readiorow select //
+                    setradioSelectRow(row)
+                    // for readiorow select //
 
-                    // setradioSelect(row)
-
+                    // for checkbox row select //
                     let isAvilable = selectedRows.findIndex((ele: any) => {
                         return ele.id === row.id
                     })
@@ -122,16 +126,14 @@ const Index = () => {
                     } else {
                         setSelectedRows((prev: any[]) => ([...prev, row]))
                     }
-
+                    // for checkbox row select //
                 }}
-
-                isRowSelected={(row: any) => radioSelect.id === row.id}
-                // isRowSelected={(row: any) => selectedRows.findIndex((selectrow) => selectrow.id === row.id) > -1}
+                // isRowSelected={(row: any) => radioSelectRow.id === row.id}
+                isRowSelected={(row: any) => selectedRows.findIndex((selectrow) => selectrow.id === row.id) > -1}
 
                 onSelectAll={() => {
                     if (rows.length !== selectedRows.length) {
                         setSelectedRows(rows)
-
                     } else {
                         setSelectedRows([])
                     }
@@ -142,4 +144,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default TableIndex;
