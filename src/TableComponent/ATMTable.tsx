@@ -51,7 +51,7 @@ function ATMTable({
                         {heading.map((ele, ind) => {
                             return (
                                 <div id='cell' key={ind} className={`${ele.flex} text-orange`}>
-                                    {ele.headingData}
+                                    {ele.heading}
                                 </div>
                             )
                         })}

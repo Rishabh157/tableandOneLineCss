@@ -1,0 +1,21 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.table-header {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #FDE9DF;
+    /* display: flex; */
+}
+
+#cell{
+    color: #EE5924;
+}
+
+.table-body {
+    background-color: #FBFBFB;
+
+}

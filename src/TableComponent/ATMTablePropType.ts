@@ -2,7 +2,7 @@ import { ReactNode } from "react"
 
 export interface ATMTablePropsType {
     heading: {
-        headingData: string,
+        heading: string,
         field: string,
         flex?: string,
         renderCell?: (row: any) => ReactNode,
