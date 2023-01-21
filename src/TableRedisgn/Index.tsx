@@ -1,10 +1,11 @@
 import React from 'react';
+import ATOMTable from './ATOMTable';
 import "./Table.css"
 
 function Index() {
   return (
     <div>
-        HELLO WORLD 
+      <ATOMTable />
     </div>
   )
 }
